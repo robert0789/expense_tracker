@@ -7,21 +7,21 @@ The main outputs of this project are organized daily personalized spending and m
 ### Epic 1 : Expense Capture & Logging
 - As a user, I want to record income and expense with minimum effort, so i able to create record without any haze
 - As a user, I want to record income and expense with date, category, amount, and write a note, so every record is clear and accurate
-- As a user, I want to income and expense based added on selected  
+- As a user, I want to select whether a transaction is income or expense, so that the transaction is recorded and calculated in the correct financial category.
 ### Epic 2: Categorization & Record Management
 - As a user, I want to see the history of expense and income record, so that i can review and audit my money flow
 - As a user, I want to able modify records of income and expense, so that i can correct any record mistake with ease
 - As a user, I want to create a custom category of income and expense, so that each income and expense has meaningful category
-### Epic 3: Budgeting & Spend Alert
+### Epic 3: Budgeting
 - As a user, I want to able create monthly budgeting for each expense category, so that i do not overspend
 ### Epic 4: Data Export, Reporting & Data Insights
--  As a user, I want to view a central dashboard showing my net recorded balance, total income, total expense, net cash flow, remaining budget, and recent transactions.
+-  As a user, I want to view a central dashboard showing my total income, total expense, net cash flow, remaining budget, and recent transactions.
 -  As a user, I want to see a pie chart or bar graph of my expenses broken down by category so that I can visually identify my largest spending habits.
--  As a user, I want to filter my transaction history by date range, category, or payment method so that I can find specific purchases quickly.
+-  As a user, I want to filter my transaction history by date range and category so that I can find specific purchases quickly.
 -  As a user, I want to export data with custom range of data, so that i can access transaction history without using app
 
 ## Core Features
-- Simple forms to record expense or income based on date, type (income or expense), category, amount (limited on Rp), note, and optional file attachment and flag for reccuring income/expense
+- Simple forms to record expense or income based on date, type (income or expense), category, amount (limited on Rp), and optional note
 - budgeting window to select category and budget amount for fixed month
 - clean table display expense daily record 
 - Clean displays showing total income, total spending, and current remaining balance for each month
@@ -37,6 +37,7 @@ The main outputs of this project are organized daily personalized spending and m
 | P0 - Mandatory | Monthly budgeting | Budget per category and usage status is correct |
 | P0 - Mandatory | Automated testing | each feature is tested successfully with normal, edge, and error handling |
 | P0 - Mandatory | Streamlit Dashboard | each feature is translated successfully into UI  |
+| P1 - Target | Filter Date and Category | user can filter transaction by date and category   |
 | P1 - Target | History filtering and CSV export | user can search record history on date range and export record history in csv|
 | P1 - Target | Rule based categorization| keyword that helps category suggestion|
 
@@ -72,11 +73,11 @@ The main outputs of this project are organized daily personalized spending and m
 - The budget must be greater than zero for the usage percentage to be calculated.
 
 ### Reporting rules
-- reporting shows the total income, total expense, net recorded balance, and remaining budget on time monthly horizon
+- reporting shows the total income, total expense, net cash flow, and remaining budget on time monthly horizon
 
 ## Acceptance Criteria
 ### Expense Capture & Logging
-- Given a user is on the "Add Transaction" screen, when they input an amount , select a category and type, pick a date, write note, attach file and flag recurring spending if needed, and submit, then the record is **saved into SQLite** and immediately appears in the transaction history list.
+- Given a user is on the "Add Transaction" screen, when they input an amount , select a category and type, pick a date, write note, and submit, then the record is **saved into SQLite** and immediately appears in the transaction history list.
 - Forms able to prevent user from submit appropriate data, i.e., leaving the type and category select blank and amount is not number or negative number.
 
 ### Categorization & Record Management
@@ -86,7 +87,7 @@ The main outputs of this project are organized daily personalized spending and m
 - Given a user on a records of income and expense, when user click the delete button, the confirmation window will show up to confirm the delete process and **data will deleted on SQLite and system recalculate the data summarization**,  Pop up window will notify the record has successfully deleted and deleted data won't show in the record history, as the system shows updated data summarization
 
 ### Budgeting & Spend Alert
-- Given a user sets a monthly budget limit, example of Rp1.000.000 for the "Groceries" category, when their total expenses in that category reach Rp500.000, Rp750.000, Rp900.000 and Rp1.000.000 or cross it, then the status on the dashboard appear on different color tone (dark green as expense exceed 50% , yellow as expense exceed 75%, orange as expense exceed 90%, red as expense exceed 100%). 
+- Given a user sets a monthly budget limit, example of Rp1.000.000 for the "Groceries" category, when their total expenses in that category reach Rp500.000, Rp750.000, Rp900.000 and Rp1.000.000 or cross it, then the status on the dashboard appear on different message and color tone (dark green as expense within 50% - 75% with message "Concern" , yellow as expense within 75%-90% with message "Warning", orange as expense exceed 90%-100% with message "Almost Exceed", red as expense exceed 100% with message "Exceed"). 
 
 ### Data Export, Reporting & Data Insights
 - Given a user click the export button, user are navigate time horizon selection to date range picker (from date picker - to date picker) and a checker for all data, the system will execute download the csv of historical expense record (with all its column) and user able to access the csv offline. If the transaction is empty, system will inform to user in the pop up window
