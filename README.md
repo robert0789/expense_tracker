@@ -24,7 +24,7 @@ The main outputs of this project are organized daily personalized spending and m
 - Simple forms to record expense or income based on date, type (income or expense), category, amount (limited on Rp), and optional note
 - budgeting window to select category and budget amount for fixed month
 - clean table display expense daily record 
-- Clean displays showing total income, total spending, and current remaining balance for each month
+- Clean displays showing total income, total spending, and net cash flow for selected month, along with remaining budget for each budgeted category.
 - Pie graphs, bar charts, and trend lines to break down spending by category or time frame.
 - Export record in csv format within range (can be all data)
 
@@ -37,8 +37,7 @@ The main outputs of this project are organized daily personalized spending and m
 | P0 - Mandatory | Monthly budgeting | Budget per category and usage status is correct |
 | P0 - Mandatory | Automated testing | each feature is tested successfully with normal, edge, and error handling |
 | P0 - Mandatory | Streamlit Dashboard | each feature is translated successfully into UI  |
-| P1 - Target | Filter Date and Category | user can filter transaction by date and category   |
-| P1 - Target | History filtering and CSV export | user can search record history on date range and export record history in csv|
+| P1 - Target | Transaction filtering and CSV export | Users can filter transactions by date range and category, then export the selected records or all records to CSV.|
 | P1 - Target | Rule based categorization| keyword that helps category suggestion|
 
 
@@ -87,8 +86,13 @@ The main outputs of this project are organized daily personalized spending and m
 - Given a user on a records of income and expense, when user click the delete button, the confirmation window will show up to confirm the delete process and **data will deleted on SQLite and system recalculate the data summarization**,  Pop up window will notify the record has successfully deleted and deleted data won't show in the record history, as the system shows updated data summarization
 
 ### Budgeting & Spend Alert
-- Given a user sets a monthly budget limit, example of Rp1.000.000 for the "Groceries" category, when their total expenses in that category reach Rp500.000, Rp750.000, Rp900.000 and Rp1.000.000 or cross it, then the status on the dashboard appear on different message and color tone (dark green as expense within 50% - 75% with message "Concern" , yellow as expense within 75%-90% with message "Warning", orange as expense exceed 90%-100% with message "Almost Exceed", red as expense exceed 100% with message "Exceed"). 
-
+- Given a user sets a monthly budget limit, example of Rp1.000.000 for the "Groceries" category, when their total expenses in that category reach Rp500.000, Rp750.000, Rp900.000 and Rp1.000.000 or cross it, then the status on the dashboard appear on different message and color tone. The budget status categorize as its percentage budget remaining:
+| Usage Percentage | Status |
+| budget < 50% | Normal|
+| 50% <= budget < 75% | Concern |
+| 75% <= budget < 90% | Warning |
+| 90% <= budget < 100% | Almost Exceeded|
+| budget >= 100% | Exceeded|
 ### Data Export, Reporting & Data Insights
 - Given a user click the export button, user are navigate time horizon selection to date range picker (from date picker - to date picker) and a checker for all data, the system will execute download the csv of historical expense record (with all its column) and user able to access the csv offline. If the transaction is empty, system will inform to user in the pop up window
 - Given a user navigates to the analytics or reports tab, when transactions exist for the selected month, then a pie chart or bar graph accurately displays spending breakdown per category
@@ -189,7 +193,7 @@ Additional features may be considered once core acceptance criteria are met. Any
 
 ## Definition of Done
 - CRUD transactions work, and data persists after the application is restarted.
-- Balance, net cash flow, category analysis, and budget consistency with transaction data.
+- Net cash flow, category summaries, and budget calculations are consistent with the recorded transaction data
 - Input errors are rejected with clear behavior.
 - Tests import actual production implementations, not sponsored synthetic classes, into the test files.
 - Database operations and business logic have normal tests and relevant edge/error cases.
