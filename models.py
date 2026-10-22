@@ -9,14 +9,36 @@ Three main entity
 from dataclasses import dataclass
 from typing import Literal
 
+#literal help inform static type checkers hat a variable or function argument must equal a specific, exact value, rather than just any value of that type
 TransactionType = Literal["income", "expense"]
 
-#data class decorator is decorator that specially optimized for storing-only class, automatically generate __init__, __repr__, and __eq__
+#data class reguler python class that automatically generate __init__, __repr__, and __eq__
 #frozen = True disallow attribute change thus prevent any accidental change
+
+#ObjectData serve as transaction object that have not been created (id has not been instatiated)
 @dataclass(frozen=True)
-class Transaction():
+class TransactionData:
+    date: str
+    type: TransactionType
+    category_id: int
+    amount: int
+    note: str | None = None
+    
+@dataclass(frozen=True)
+class CategoryData:
+    name : str
+    type : TransactionType
+
+@dataclass(frozen=True)
+class BudgetData:
+    category_id : int 
+    period : str #date of budget being set, format YYYY-MM    
+    amount : int
+
+@dataclass(frozen=True)
+class Transaction:
     id : int
-    date : str
+    date : str #format YYYY-MM-DD
     type : TransactionType
     category_id : int
     amount : int
@@ -31,9 +53,9 @@ class Category:
 @dataclass(frozen=True)
 class Budget:
     id : int
-    category_id : int
-    budget_amount : int
-    period : str #date of budget being set
+    category_id : int 
+    period : str #date of budget being set, format YYYY-MM
+    amount : int
 
 @dataclass(frozen=True)
 class FinancialSummary:
